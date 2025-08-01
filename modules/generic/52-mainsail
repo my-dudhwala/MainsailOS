@@ -18,6 +18,7 @@ source /files/00-config
 ########################################
 
 #DOWNLOAD_URL="https://github.com/mainsail-crew/mainsail/releases/latest/download/mainsail.zip"
+# To check if it gets chaged in the image file
 DOWNLOAD_URL="https://github.com/my-dudhwala/my-mainsail/archive/refs/tags/First-test.zip"
 CONFIG_REPO="https://github.com/mainsail-crew/mainsail-config.git"
 DEPS=(git nginx unzip)

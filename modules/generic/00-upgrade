@@ -3,6 +3,11 @@ set -xe
 export LC_ALL=C
 
 ########################################
+# Disable initramfs generation         #
+########################################
+echo "INITRD=no" > /etc/initramfs-tools/conf.d/no-initrd.conf
+
+########################################
 # Functions and Basic Configuration    #
 ########################################
 

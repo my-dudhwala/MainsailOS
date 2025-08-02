@@ -20,9 +20,9 @@ source /files/00-config
 SRC_DIR="/home/${BASE_USER}/klipper"
 ENV_DIR="/home/${BASE_USER}/klippy-env"
 
-#REPO="https://github.com/Klipper3d/klipper.git" # Original Klipper repository
+REPO="https://github.com/Klipper3d/klipper.git" # Original Klipper repository
 # Use a custom repository for testing purposes
-REPO="https://github.com/my-dudhwala/my-klipper"
+#REPO="https://github.com/my-dudhwala/my-klipper"
 
 # This is a second test line in mainsailOS repo to check if it reflects after image generation because
 # previous generation was failed for rpi

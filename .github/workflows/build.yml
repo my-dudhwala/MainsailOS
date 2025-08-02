@@ -141,8 +141,8 @@ jobs:
           workspace: "${{ github.workspace }}/build"
           scripts:  "${{ github.workspace }}/scripts"
           config: "${{ github.workspace }}/config.local"
-          # environment: '{ "RELEASE_TAG": "${{ env.RELEASE_TAG }}"}'
-          environment: '{ "RELEASE_TAG": "${{ env.RELEASE_TAG }}", "DEBIAN_FRONTEND": "noninteractive" }'
+          environment: '{ "RELEASE_TAG": "${{ env.RELEASE_TAG }}"}'
+          # environment: '{ "RELEASE_TAG": "${{ env.RELEASE_TAG }}", "DEBIAN_FRONTEND": "noninteractive" }'
 
       - name: "✏ Rename image"
         working-directory: ./build

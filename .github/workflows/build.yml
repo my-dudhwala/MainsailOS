@@ -138,14 +138,13 @@ jobs:
       - name: "🐛 Add fix script for initramfs-tools errors"
         run: |
           mkdir -p scripts/files/usr/local/bin
-          cat << 'EOF' > scripts/files/usr/local/bin/fix-initramfs.sh
-#!/bin/bash
-echo "⚙ Fixing broken dpkg packages inside image chroot..."
-apt-get update
-apt-get install -f -y
-dpkg --configure -a || true
-EOF
+          echo '#!/bin/bash' > scripts/files/usr/local/bin/fix-initramfs.sh
+          echo 'echo "⚙ Fixing broken dpkg packages inside image chroot..."' >> scripts/files/usr/local/bin/fix-initramfs.sh
+          echo 'apt-get update' >> scripts/files/usr/local/bin/fix-initramfs.sh
+          echo 'apt-get install -f -y' >> scripts/files/usr/local/bin/fix-initramfs.sh
+          echo 'dpkg --configure -a || true' >> scripts/files/usr/local/bin/fix-initramfs.sh
           chmod +x scripts/files/usr/local/bin/fix-initramfs.sh
+
 
       - name: "🏗 Run CustoPiZer"
         uses: OctoPrint/CustoPiZer@main
@@ -153,7 +152,12 @@ EOF
           workspace: "${{ github.workspace }}/build"
           scripts:  "${{ github.workspace }}/scripts"
           config: "${{ github.workspace }}/config.local"
-          environment: '{ "RELEASE_TAG": "${{ env.RELEASE_TAG }}"}'
+          environment: '{
+            "RELEASE_TAG": "${{ env.RELEASE_TAG }}",
+            "DEBIAN_FRONTEND": "noninteractive",
+            "CUSTOM_SCRIPT": "/usr/local/bin/fix-initramfs.sh"
+          }'
+
           # environment: '{ "RELEASE_TAG": "${{ env.RELEASE_TAG }}", "DEBIAN_FRONTEND": "noninteractive" }'
 
       - name: "✏ Rename image"

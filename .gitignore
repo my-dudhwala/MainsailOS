@@ -10,3 +10,6 @@ src/build.log
 # Ignore vscode settings
 .vscode
 .vscode/**
+
+#ignore indication file for Hp personal laptop
+NewSetupInHPPersonal.txt

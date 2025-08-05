@@ -135,13 +135,14 @@ jobs:
         working-directory: ./scripts
         run: ls -la
 
-      - name: "🐛 Add fix script for initramfs-tools errors"
+      - name: "🐛 Add apt/dpkg fix script inside image"
         run: |
           mkdir -p scripts/files/usr/local/bin
           echo '#!/bin/bash' > scripts/files/usr/local/bin/fix-initramfs.sh
-          echo 'echo "⚙ Fixing broken dpkg packages inside image chroot..."' >> scripts/files/usr/local/bin/fix-initramfs.sh
-          echo 'apt-get update' >> scripts/files/usr/local/bin/fix-initramfs.sh
-          echo 'apt-get install -f -y' >> scripts/files/usr/local/bin/fix-initramfs.sh
+          echo 'echo "⚙ Running apt fix inside image..."' >> scripts/files/usr/local/bin/fix-initramfs.sh
+          echo 'export DEBIAN_FRONTEND=noninteractive' >> scripts/files/usr/local/bin/fix-initramfs.sh
+          echo 'apt-get update || true' >> scripts/files/usr/local/bin/fix-initramfs.sh
+          echo 'apt-get install -f -y || true' >> scripts/files/usr/local/bin/fix-initramfs.sh
           echo 'dpkg --configure -a || true' >> scripts/files/usr/local/bin/fix-initramfs.sh
           chmod +x scripts/files/usr/local/bin/fix-initramfs.sh
 
@@ -157,6 +158,7 @@ jobs:
             "DEBIAN_FRONTEND": "noninteractive",
             "CUSTOM_SCRIPT": "/usr/local/bin/fix-initramfs.sh"
           }'
+
 
           # environment: '{ "RELEASE_TAG": "${{ env.RELEASE_TAG }}", "DEBIAN_FRONTEND": "noninteractive" }'
 
